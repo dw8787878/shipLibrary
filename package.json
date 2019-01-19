@@ -1,0 +1,34 @@
+{
+  "name": "shiplibrary",
+  "version": "0.0.1",
+  "description": "Uses Google Books API to search for books, and can be accessed through a web browser.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "start-dev": "nodemon server.js --watch server --watch index.js --watch package.json",
+    "build": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dw8787878/shipLibrary.git"
+  },
+  "author": "Darryn Wu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dw8787878/shipLibrary/issues"
+  },
+  "homepage": "https://github.com/dw8787878/shipLibrary#readme",
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "nodemon": "^1.18.9",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "webpack": "^4.28.4",
+    "webpack-cli": "^3.2.1"
+  },
+  "dependencies": {}
+}
