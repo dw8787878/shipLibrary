@@ -7,7 +7,7 @@ const path = require('path');
 //const hostname ='127.0.0.1';
 const port = 3000;
 
-app.get('/', (req, res) => res.sendFile(resolve(__dirname, '..', '/Users/darrynwu/shipLibrary/public', 'index.html')));
+app.get('/', (req, res) => res.sendFile(`${__dirname}/public/`, 'index.html'));
 
 app.listen(port, (err)=>{
   if (err) {
