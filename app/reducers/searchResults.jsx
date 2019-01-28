@@ -3,19 +3,17 @@ import axios from 'axios'
 /* -----------------    ACTIONS     ------------------ */
 
 const LOAD_USER_BOOKS = 'LOAD_USER_BOOKS';
-const LOAD_USER_BOOKS_SUCCESS = 'LOAD_USER_BOOKS_SUCCESS';
 
 /* ------------   ACTION CREATORS     ------------------ */
 
-const loadUserBooks = topStories => ({ type: LOAD_USER_BOOKS, results })
+const loadUserBooks = books => ({ type: LOAD_USER_BOOKS, books })
 
 /* ------------       REDUCER     ------------------ */
 
 export default function reducer( results = [], action) {
   switch (action.type) {
   case LOAD_USER_BOOKS:
-    results = action.state
-    break;
+    return [ ...results, action.books]
   default:
     return results
   }
@@ -25,10 +23,14 @@ export default function reducer( results = [], action) {
 // the base URL for your REST API backend
 const baseUrl = 'https://www.googleapis.com/books/v1/volumes?q=';
 
-export const queryUserBooks = () => dispatch => {
-  axios.get(`${baseUrl}`)
-       .then(res => {
-         dispatch(loadUserBooks(res.data))
-       })
-}
-
+export const queryUserBooks = (queryString) => {
+  return (dispatch) => {
+    return axios.get(`${baseUrl}${queryString}`)
+      .then(response => {
+        dispatch(loadUserBooks(response.data))
+      })
+      .catch(error => {
+        throw (error);
+      });
+  };
+};
