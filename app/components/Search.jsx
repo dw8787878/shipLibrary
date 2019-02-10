@@ -1,37 +1,48 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { queryUserBooks } from '../reducers/searchResults'
-import store from '../store.jsx'
 
 class Search extends Component{
   constructor(props){
     super(props)
-    this.state = {
-      queryText: ''
-    }
 
-    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({queryText: event.target.value});
-  }
-
-  handleSubmit(){
+  handleSubmit(event){
     event.preventDefault();
-    this.props.queryForBooks(this.state.queryText);
+    //console.log('event' + event)
+    //console.log('event target theQuery' + event.target.theQuery)
+    this.props.queryForBooks(event.target.theQuery);
   }
 
   render(){
+    let listOfBooks = this.props.books ? this.props.books : [];
+    listOfBooks = JSON.stringify(listOfBooks);
     return (
+      <div>
       <form onSubmit={this.handleSubmit}>
         <label>
         Please submit book query:
-        <input type="text" value={this.state.queryText} onChange={this.handleChange} />
         </label>
+        <input type="text" name="theQuery" />
         <input type="submit" value="Submit" />
       </form>
+      <br />
+      <h1>Here are the results:</h1>
+      {listOfBooks}
+              {/*(listOfBooks.map((book) => {
+                  return (
+                    <div key={book.id}>
+                      <li>
+                        <div> {book} </div>
+                      </li>
+                    </div>
+                  )
+              }))
+              */}
+
+      </div>
     )
   }
 }
@@ -44,8 +55,9 @@ const mapDispatchToProps = dispatch => {
 }
 
 const mapStateToProps = function(state) {
+  console.log('state ', state)
   return {
-    books: state.results
+    books: state
   }
 }
 

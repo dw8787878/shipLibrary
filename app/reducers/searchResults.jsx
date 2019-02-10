@@ -10,12 +10,12 @@ const loadUserBooks = books => ({ type: LOAD_USER_BOOKS, books })
 
 /* ------------       REDUCER     ------------------ */
 
-export default function reducer( results = [], action) {
+export default function reducer(state = [], action) {
   switch (action.type) {
   case LOAD_USER_BOOKS:
-    return [ ...results, action.books]
+    return [ ...state, action.books]
   default:
-    return results
+    return state
   }
 }
 
